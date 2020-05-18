@@ -48,10 +48,8 @@ for e in range(1,20000):
     state     = env.reset()
     ep_reward = 0
     
-    
-    count = 0
+
     while not done:
-        
         # take action
         action = network.forward(state)
         # if args.env == 'mount' and action == 1: action += 1
@@ -68,6 +66,7 @@ for e in range(1,20000):
         if args.render and e // 250 == 1: env.render()
 
         state = next_state
+        if reward > -1.0: print (reward)
         
 
 
@@ -95,7 +94,7 @@ for e in range(1,20000):
 
     if args.plot: network.plot()
 
-    if args.verbose and e % 100 == 0:
+    if args.verbose and e % 10 == 0:
         print('Episode:', e, 'Reward:', np.mean(network.episode_rewards[-10:]))
 
     if np.mean(network.episode_rewards[-100:]) > 500 and args.env == 'binary': break
