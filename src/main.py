@@ -47,8 +47,14 @@ for e in range(1,20000):
     done      = False
     state     = env.reset()
     ep_reward = 0
-
+    
+    if e%10 ==0: 
+        sys.stdout.write("\repisode %i" % e)
+        sys.stdout.flush()
+    
+    count = 0
     while not done:
+        
         # take action
         action = network.forward(state)
         # if args.env == 'mount' and action == 1: action += 1
@@ -65,6 +71,12 @@ for e in range(1,20000):
         if args.render and e // 250 == 1: env.render()
 
         state = next_state
+        
+        # print ('R: ',reward)
+        # if reward > -1.0: print (reward)
+        count = count + 1
+        if count > 100: print ("steps: ", count)
+
 
     if args.neuron_type == 'DQN':
         # hack to get state,next_state to play nicely in DQN
