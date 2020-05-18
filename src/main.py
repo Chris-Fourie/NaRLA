@@ -65,9 +65,7 @@ for e in range(1,20000):
 
         if args.render and e // 250 == 1: env.render()
 
-        state = next_state
-        if reward > -1.0: print (reward)
-        
+        state = next_state     
 
 
     if args.neuron_type == 'DQN':
