@@ -48,9 +48,6 @@ for e in range(1,20000):
     state     = env.reset()
     ep_reward = 0
     
-    if e%10 ==0: 
-        sys.stdout.write("\repisode %i" % e)
-        sys.stdout.flush()
     
     count = 0
     while not done:
@@ -72,10 +69,6 @@ for e in range(1,20000):
 
         state = next_state
         
-        # print ('R: ',reward)
-        # if reward > -1.0: print (reward)
-        count = count + 1
-        if count > 100: print ("steps: ", count)
 
 
     if args.neuron_type == 'DQN':
@@ -102,7 +95,7 @@ for e in range(1,20000):
 
     if args.plot: network.plot()
 
-    if args.verbose and e % 10 == 0:
+    if args.verbose and e % 100 == 0:
         print('Episode:', e, 'Reward:', np.mean(network.episode_rewards[-10:]))
 
     if np.mean(network.episode_rewards[-100:]) > 500 and args.env == 'binary': break
